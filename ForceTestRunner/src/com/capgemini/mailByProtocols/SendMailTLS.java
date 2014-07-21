@@ -66,6 +66,7 @@ public class SendMailTLS {
 			messageBodyPart = new MimeBodyPart();
 			String file = path;
 			String fileName = "allTestRunResult.xls";
+			
 			DataSource source = new FileDataSource(file);
 			messageBodyPart.setDataHandler(new DataHandler(source));
 			messageBodyPart.setFileName(fileName);
