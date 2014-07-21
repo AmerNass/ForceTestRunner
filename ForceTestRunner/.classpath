@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/Users/anassere/Desktop/Stage/ForceTestRunner/wsc-23.jar"/>
-	<classpathentry kind="lib" path="D:/Users/anassere/Desktop/Stage/ForceTestRunner/jexcelapi_2_6_12/jexcelapi/jxl.jar"/>
-	<classpathentry kind="lib" path="D:/Users/anassere/Desktop/Stage/ForceTestRunner/apex.jar"/>
-	<classpathentry kind="lib" path="D:/Users/anassere/Desktop/Stage/ForceTestRunner/partner.jar"/>
-	<classpathentry kind="lib" path="D:/Users/anassere/Desktop/Stage/ForceTestRunner/enterprise.jar"/>
-	<classpathentry kind="lib" path="D:/Users/anassere/Desktop/Stage/ForceTestRunner/jasypt-1.9.2/lib/jasypt-1.9.2.jar"/>
-	<classpathentry kind="lib" path="D:/Users/anassere/Desktop/Stage/ForceTestRunner/javamail-1.4.7/mail.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/anassere/git/ForceTestRunner-1.0/ForceTestRunner/externalLib/apex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anassere/git/ForceTestRunner-1.0/ForceTestRunner/externalLib/enterprise.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anassere/git/ForceTestRunner-1.0/ForceTestRunner/externalLib/jasypt-1.9.2/lib/jasypt-1.9.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anassere/git/ForceTestRunner-1.0/ForceTestRunner/externalLib/jexcelapi_2_6_12/jexcelapi/jxl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anassere/git/ForceTestRunner-1.0/ForceTestRunner/externalLib/javamail-1.4.7/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anassere/git/ForceTestRunner-1.0/ForceTestRunner/externalLib/partner.jar"/>
+	<classpathentry kind="lib" path="C:/Users/anassere/git/ForceTestRunner-1.0/ForceTestRunner/externalLib/wsc-23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
