@@ -49,7 +49,7 @@ public class Main {
 			RunTestsResult res = runner.runAllTests();
 			ExcelTools.runExcelMaker(runner.parseResult(res));
 
-			ClassInformationExtractor.extractAllMethods(res);
+			//ClassInformationExtractor.extractAllMethods(res);
 
 		}
 		String name = System.getProperty ( "os.name" ).toLowerCase();
@@ -64,6 +64,8 @@ public class Main {
 		{
 			return ;
 		}
+		
+		System.out.println("binfing");
 
 		for(String mail : p.getMailsListValue())
 		{
@@ -78,4 +80,36 @@ public class Main {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

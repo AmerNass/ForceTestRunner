@@ -192,8 +192,6 @@ public class ForceTestRunnerTools {
 		try {
 			QueryResult qr = connection.query(soqlQuery);
 			boolean done = false;
-
-
 			//<<<<<<<<< a supprimer
 			int counter = 5;
 			//<<<<<<<<<<
@@ -202,20 +200,26 @@ public class ForceTestRunnerTools {
 				System.out.println("\nLogged-in user can see "
 						+ qr.getRecords().length + " contact records.");
 
+				int first = 0;
+
 				while (!done) {
-					System.out.println("");
+					if(first == 0){
+						System.out.println("First Query ...");
+						first++;
+					} else if (first == 1){
+						System.out.println("... and querying more");
+					}else{
+						System.out.println("and more ...");
+					}
 					SObject[] records = qr.getRecords();
 					for (int i = 0; i < records.length; ++i) {
 						ApexClass con = (ApexClass) records[i];
 
 						//System.out.println(con.getName()+" : "+ con.getIsValid());
-
-
-						if(con.getBody() != null && con.getBody().toLowerCase().contains("@istest"))
+						if( /*(con.getName().contains("WS004_CallinSFDC_CreateAccount_TEST")) &&*/ (!con.getName().contains("MNE_TEST")) && con.getBody() != null && con.getBody().length() > 10 && !con.getBody().contains("(hidden)") && con.getBody().toLowerCase().contains("@istest"))
 						{
 							result.add(con);
 						}
-
 					}
 
 					if (qr.isDone()) {
@@ -253,13 +257,13 @@ public class ForceTestRunnerTools {
 					for (int i = 0; i < records.length; ++i) {
 						ApexClass con = (ApexClass) records[i];
 
-						if(con.getBody().contains("@isTest"))/* && !con.getName().equals("APB005_AudienceMember_Update_TEST")
-								&& !con.getName().contains("WS052_Ecom_RegisterPayment_TEST")
-								&& !con.getName().contains("XMLDomTest")
-								&& !con.getName().contains("zQuoteBeforeInsert_Test")
-								&& !con.getName().contains("ZZ001_Datapatch_AccountAdresse_TEST")
-								&& !con.getName().contains("WS052_RegisterPaymentInvoice_TEST")
-								&& !con.getName().contains("ZuoraSyncHistoryAfterInsert"))*/
+
+						if(con.getName().equals("EM014_DocPli_TEST")
+								|| con.getName().contains("EM015_DocDonnee_TEST")
+								|| con.getName().contains("EM016_DictionDonne_TEST")
+								|| con.getName().contains("EM017_Colonnes_TEST")
+								|| con.getName().contains("EM031_Document_TEST")
+								|| con.getName().contains("EM040_Pli_TEST")) 
 							result.add(con);
 
 					}
@@ -317,8 +321,8 @@ public class ForceTestRunnerTools {
 
 		return array;
 	}
-	
-	
+
+
 	public RunTestsResult runAllTests(int nb) throws ConnectionException
 	{
 		//switch the service endpoint to the Apex service
@@ -333,9 +337,9 @@ public class ForceTestRunnerTools {
 		//request.setAllTests(true);
 
 		/* alternative a setAllTest(true); */
-		request.setClasses(getTestClassName(findAllClass()));
-		
-		
+		request.setClasses(getTestClassName(findTestMethod()));
+
+
 
 		/* à utiliser quand on a besoin de tester les 5 (par exemple) premier classe de tests */
 		//request.setClasses(new String[] {"AP020_Case_TEST"});
@@ -399,9 +403,9 @@ public class ForceTestRunnerTools {
 		//request.setAllTests(true);
 
 		/* alternative a setAllTest(true); */
-		request.setClasses(getTestClassName(findAllClass()));
-		
-		
+		request.setClasses(getTestClassName(findTestMethod()));
+
+
 
 		/* à utiliser quand on a besoin de tester les 5 (par exemple) premier classe de tests */
 		//request.setClasses(new String[] {"DBRessourcesCauseV2_TEST"});
@@ -410,7 +414,7 @@ public class ForceTestRunnerTools {
 		long start = System.currentTimeMillis();
 
 		//CompileAndTestResult cResult = connector.compileAndTest(compileAndTest);
-		System.out.println(">>###YY Arrived to the BreakUp Point ! Sending Request !\nwaiting for response ...");
+		System.out.println(">> Arrived to the BreakUp Point ! Sending Request !\nwaiting for response ...");
 
 		//execution de toutes les classes
 		RunTestsResult r = connector.runTests(request);
@@ -455,15 +459,17 @@ public class ForceTestRunnerTools {
 
 		List<CodeCoverageResult> listOfCoverage = new ArrayList<CodeCoverageResult>();
 		for (CodeCoverageResult ccr : result.getCodeCoverage()) {
-			if(ccr.getNumLocationsNotCovered() == 0)
-			{
-				covered ++;
+			if(ccr.getNamespace() == null || ccr.getNamespace().isEmpty()){
+				if(ccr.getNumLocationsNotCovered() == 0)
+				{
+					covered ++;
+				}
+				else 
+				{
+					notCovered ++;
+				}
+				listOfCoverage.add(ccr);
 			}
-			else 
-			{
-				notCovered ++;
-			}
-			listOfCoverage.add(ccr);
 		}
 		infos.setCodeCoverages(listOfCoverage);
 
